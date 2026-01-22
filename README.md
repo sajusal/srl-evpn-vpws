@@ -6,4 +6,4 @@ Chassis Type: 7250 IXR-X3b
 
 # Topology
 
-[!image](srl-evpn-vpws.png)
+[!image](evpn-vpws.svg)
