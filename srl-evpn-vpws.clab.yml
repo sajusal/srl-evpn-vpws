@@ -1,0 +1,30 @@
+name: evpn-vpws
+
+prefix: ""
+topology:
+  defaults:
+    kind: nokia_srlinux
+  kinds:
+    nokia_srlinux:
+      image: ghcr.io/nokia/srlinux:25.10.1
+      type: ixr-x3b
+      license: license-srlinux2510.txt
+    linux:
+      image: ghcr.io/srl-labs/network-multitool
+  nodes:
+    pe1:
+      startup-config: configs/pe1-startup.json
+    pe2:
+      startup-config: configs/pe2-startup.json
+    ce1:
+      kind: linux
+      exec:
+        - ip address add 172.16.10.50/24 dev eth1
+    ce2:
+      kind: linux
+      exec:
+        - ip address add 172.16.10.60/24 dev eth1
+  links:
+    - endpoints: ["pe1:e1-1","pe2:e1-1"]
+    - endpoints: ["pe1:e1-10","ce1:eth1"]
+    - endpoints: ["pe2:e1-10","ce2:eth1"]
